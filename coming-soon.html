@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroGuruji - Coming Soon</title>
+    <link rel="icon" type="image/svg+xml" href="astroguruji-fav-icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=Sora:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold-strong: #febd19;
+            --gold-soft: #ffd36a;
+            --cream-strong: #fff4da;
+            --cream-soft: #fffdf7;
+            --cream-panel: #fff7e3;
+            --ink: #2f2f2f;
+            --ink-muted: #5f5f5f;
+            --border-soft: #f1e7cf;
+        }
+
+        body {
+            font-family: 'Poppins', 'Sora', sans-serif;
+            color: var(--ink);
+            background: radial-gradient(circle at 10% 10%, var(--cream-strong) 0, transparent 45%),
+                radial-gradient(circle at 90% 0%, var(--cream-panel) 0, transparent 40%),
+                linear-gradient(180deg, var(--cream-soft) 0%, var(--cream-strong) 70%, var(--cream-soft) 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Stars Background */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold-soft);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            box-shadow: 0 0 6px var(--gold-soft);
+        }
+
+        .star:nth-child(odd) {
+            animation-duration: 2s;
+        }
+
+        .star:nth-child(3n) {
+            animation-duration: 4s;
+            background: var(--gold-strong);
+            box-shadow: 0 0 8px var(--gold-strong);
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Cosmic Orb Animation */
+        .cosmic-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--gold-strong), var(--gold-soft));
+            top: 10%;
+            left: -5%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--cream-panel), var(--cream-strong));
+            bottom: 10%;
+            right: -5%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(50px, 50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Logo/Title */
+        .logo-container {
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 20px rgba(254, 189, 25, 0.3));
+            animation: logoGlow 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 6px 30px rgba(254, 189, 25, 0.5));
+        }
+
+        @keyframes logoGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 4px 20px rgba(254, 189, 25, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 6px 30px rgba(254, 189, 25, 0.6));
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Avatars Container */
+        .avatars-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .avatar-card {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cream-panel), var(--cream-soft));
+            border: 3px solid var(--border-soft);
+            box-shadow: 0 10px 30px rgba(122, 90, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: floatAvatar 6s ease-in-out infinite;
+        }
+
+        .avatar-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(254, 189, 25, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shineRotate 4s linear infinite;
+            opacity: 0;
+        }
+
+        .avatar-card:hover::before {
+            opacity: 1;
+        }
+
+        .avatar-card:hover {
+            transform: translateY(-15px) scale(1.15) rotateY(10deg);
+            box-shadow: 0 20px 50px rgba(254, 189, 25, 0.4);
+            border-color: var(--gold-strong);
+        }
+
+        .avatar-card img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar-card:hover img {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 8px 16px rgba(254, 189, 25, 0.3));
+        }
+
+        .avatar-name {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-transform: capitalize;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .avatar-wrapper:hover .avatar-name {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Individual Avatar Animations */
+        .avatar-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .avatar-card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .avatar-card:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .avatar-card:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        .avatar-card:nth-child(5) {
+            animation-delay: 2s;
+        }
+
+        .avatar-card:nth-child(6) {
+            animation-delay: 2.5s;
+        }
+
+        .avatar-card:nth-child(7) {
+            animation-delay: 3s;
+        }
+
+        .avatar-card:nth-child(8) {
+            animation-delay: 3.5s;
+        }
+
+        .avatar-card:nth-child(9) {
+            animation-delay: 4s;
+        }
+
+        .avatar-card:nth-child(10) {
+            animation-delay: 4.5s;
+        }
+
+        .avatar-card:nth-child(11) {
+            animation-delay: 5s;
+        }
+
+        .avatar-card:nth-child(12) {
+            animation-delay: 5.5s;
+        }
+
+        @keyframes floatAvatar {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-20px) rotate(2deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-25px) rotate(-2deg);
+            }
+        }
+
+        @keyframes shineRotate {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        /* Pulsing glow effect */
+        .avatar-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold-soft), transparent);
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+            animation: pulseGlow 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+
+            50% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        /* Coming Soon Text */
+        .coming-soon {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 15px 0;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            letter-spacing: -0.01em;
+            position: relative;
+        }
+
+        .coming-soon::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold-strong), transparent);
+            border-radius: 2px;
+            animation: expand 2s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes expand {
+
+            0%,
+            100% {
+                width: 100px;
+                opacity: 0.5;
+            }
+
+            50% {
+                width: 200px;
+                opacity: 1;
+            }
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 1rem;
+            color: var(--ink-muted);
+            margin: 10px 0;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+
+
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--gold-soft);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(0) scale(0);
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) translateX(100px) scale(1.5);
+            }
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                max-width: 250px;
+            }
+
+            .logo-container {
+                margin-bottom: 15px;
+            }
+
+            .coming-soon {
+                font-size: 1.8rem;
+                margin: 10px 0;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+                margin: 8px 0;
+            }
+
+            .avatars-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                padding: 15px 10px;
+                margin: 15px auto;
+            }
+
+            .avatar-card {
+                width: 90px;
+                height: 90px;
+            }
+
+            .avatar-name {
+                font-size: 0.7rem;
+                margin-top: 8px;
+            }
+        }
+
+        /* Magic Cursor Trail Effect */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold-soft), transparent);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 9999;
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Stars -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Cosmic Orbs -->
+    <div class="cosmic-orb orb-1"></div>
+    <div class="cosmic-orb orb-2"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="logo-container">
+            <img src="astro-guruji-logo.svg" alt="AstroGuruji" class="logo">
+        </div>
+
+        <!-- Avatars Grid -->
+        <div class="avatars-container">
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/aries-avatar.svg" alt="Aries">
+                </div>
+                <div class="avatar-name">Aries</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/taurus-avatar.svg" alt="Taurus">
+                </div>
+                <div class="avatar-name">Taurus</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/gemini-avatar.svg" alt="Gemini">
+                </div>
+                <div class="avatar-name">Gemini</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/cancer-avatar.svg" alt="Cancer">
+                </div>
+                <div class="avatar-name">Cancer</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/leo-avatar.svg" alt="Leo">
+                </div>
+                <div class="avatar-name">Leo</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/vigro-avatar.svg" alt="Virgo">
+                </div>
+                <div class="avatar-name">Virgo</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/libra-avatar.svg" alt="Libra">
+                </div>
+                <div class="avatar-name">Libra</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/scorpio-avatar.svg" alt="Scorpio">
+                </div>
+                <div class="avatar-name">Scorpio</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/sagittarius-avatar.svg" alt="Sagittarius">
+                </div>
+                <div class="avatar-name">Sagittarius</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/capricorn-avatar.svg" alt="Capricorn">
+                </div>
+                <div class="avatar-name">Capricorn</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/aquarius-avatar.svg" alt="Aquarius">
+                </div>
+                <div class="avatar-name">Aquarius</div>
+            </div>
+            <div class="avatar-wrapper">
+                <div class="avatar-card">
+                    <img src="avatars/pisces-avatar.svg" alt="Pisces">
+                </div>
+                <div class="avatar-name">Pisces</div>
+            </div>
+        </div>
+
+        <h2 class="coming-soon">Coming Soon</h2>
+
+        <p class="subtitle">
+            We're crafting something magical for you. Your cosmic journey with AstroGuruji is about to begin.
+            Stay connected and be the first to experience the mystical world of astrology.
+        </p>
+
+
+    </div>
+
+    <script>
+        // Create Stars
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            const starCount = 100;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create Floating Particles
+        function createParticles() {
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+
+        // Add interactive avatar effects
+        function initAvatarInteractions() {
+            const avatarCards = document.querySelectorAll('.avatar-card');
+
+            avatarCards.forEach((card, index) => {
+                // Add click animation
+                card.addEventListener('click', function () {
+                    this.style.animation = 'none';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 10);
+
+                    // Create ripple effect
+                    const ripple = document.createElement('div');
+                    ripple.style.position = 'absolute';
+                    ripple.style.width = '100%';
+                    ripple.style.height = '100%';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'radial-gradient(circle, rgba(254, 189, 25, 0.4), transparent)';
+                    ripple.style.animation = 'rippleEffect 0.6s ease-out';
+                    ripple.style.pointerEvents = 'none';
+                    this.appendChild(ripple);
+
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                0% {
+                    transform: scale(0.8);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+
+        // Cursor Trail Effect
+        let cursorTrails = [];
+        document.addEventListener('mousemove', (e) => {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = e.clientX - 10 + 'px';
+            trail.style.top = e.clientY - 10 + 'px';
+            trail.style.opacity = '0.6';
+            document.body.appendChild(trail);
+            cursorTrails.push(trail);
+
+            // Remove trail after animation
+            setTimeout(() => {
+                trail.style.opacity = '0';
+                setTimeout(() => trail.remove(), 300);
+            }, 300);
+
+            // Limit number of trails
+            if (cursorTrails.length > 10) {
+                const oldTrail = cursorTrails.shift();
+                if (oldTrail && oldTrail.parentNode) {
+                    oldTrail.remove();
+                }
+            }
+        });
+
+        // Initialize
+        createStars();
+        createParticles();
+        initAvatarInteractions();
+
+        // Add entrance animation on load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>
